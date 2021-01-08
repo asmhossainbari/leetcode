@@ -13,7 +13,6 @@ class Solution(object):
                 return [dictionary[target - nums[i]], i]
 
 
-
 sol = Solution()
 nums = [3, 3]
 target = 6
