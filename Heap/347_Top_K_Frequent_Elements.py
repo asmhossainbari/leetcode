@@ -1,6 +1,7 @@
 import collections
 import heapq
 
+# min heap node
 class Node(object):
     def __init__(self, val, freq):
         self.val = val
