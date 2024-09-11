@@ -4,14 +4,14 @@ class Solution(object):
         :type nums: List[int]
         :rtype: bool
         """
-        num_set = set()
-        for n in nums:
-            if n not in num_set:
-                num_set.add(n)
+        num_dictionary = dict()
+        for i in range(len(nums)):
+            if nums[i] not in num_dictionary:
+                num_dictionary[nums[i]] = i
             else:
                 return True
         return False
 
 sol = Solution()
-nums = [1,2,3,1]
-print(sol.containsDuplicate(nums=nums))
+input = [1, 2, 3]
+print(sol.containsDuplicate(nums=input))
