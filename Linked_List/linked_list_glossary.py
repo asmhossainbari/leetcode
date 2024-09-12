@@ -29,6 +29,19 @@ class LinkedList(object):
         return False
 
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        """
+        :param head: ListNode
+        :return: ListNode
+
+        input: 1->2->3->null
+        output: null<-1<-2<-3
+        we need three pointers:
+        prev points to null
+        cur points to head
+        next points to cur.next
+        since cur.next would be modified, we need to store it in next pointer
+        then, we change the pointers: cur.next, prev, cur
+        """
         if head is None:
             return head
         prev = None
