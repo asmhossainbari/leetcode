@@ -1,10 +1,12 @@
 # Definition for singly-linked list.
+
 class ListNode(object):
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
+
 class Solution(object):
-    def addTwoNumbers(self, l1, l2):
+    def addTwoNumbers(self, l1:ListNode, l2:ListNode)->ListNode:
         """
         :type l1: ListNode
         :type l2: ListNode
@@ -14,8 +16,8 @@ class Solution(object):
             return l2
         if l2 is None:
             return l1
-        ListNode result = ListNode(0)
-        ListNode head = result
+        result = ListNode(0)
+        head = result
         carry = 0
         while l1 is not None and l2 is not None:
             sum = l1.val + l2.val + carry
@@ -43,3 +45,6 @@ class Solution(object):
 
         return head.next
 
+
+sol = Solution()
+print(sol.addTwoNumbers(ListNode(0), ListNode(2)))
