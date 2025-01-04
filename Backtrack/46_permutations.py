@@ -4,23 +4,24 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-
-
+        cur = []
         result = []
-        templist = []
-        def backtrack(result, templist, nums):
-            if len(templist) == len(nums):
-                result.append(templist[:])
-                return
-            else:
-                for i in range(len(nums)):
-                    if nums[i] in templist:
-                        continue
-                    templist.append(nums[i])
-                    backtrack(result, templist, nums)
-                    templist.pop()
+        visited = [False for i in range(len(nums))]
 
-        backtrack(result, templist, nums)
+        def backtrack(cur, visited):
+            if len(cur) == len(nums):
+                result.append(cur.copy())
+                return
+            for i in range(len(nums)):
+                if visited[i]:
+                    continue
+                cur.append(nums[i])
+                visited[i] = True
+                backtrack(cur, visited)
+                cur.pop()
+                visited[i] = False
+
+        backtrack(cur, visited)
         return result
 
 sol = Solution()
