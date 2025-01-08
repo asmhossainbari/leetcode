@@ -1,4 +1,6 @@
 # time complexity: sort(nlogn) + n ==> nlogn
+# space complexity: O(1) => ignoring required space for sorting
+
 # class Solution(object):
 #     def longestConsecutive(self, nums):
 #         """
@@ -21,6 +23,8 @@
 #                 right += 1
 #         return max_len
 
+# time complexity: O(n)
+# space complexity: O(n) -> for set
 class Solution(object):
     def longestConsecutive(self, nums):
         """
