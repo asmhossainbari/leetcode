@@ -26,6 +26,7 @@ class Solution:
 
 
 sol = Solution()
+print(sol.minEatingSpeed(piles = [1, 4, 3, 2], h = 9))
 print(sol.minEatingSpeed(piles = [3,6,7,11], h = 8))
 print(sol.minEatingSpeed(piles = [30,11,23,4,20], h = 5))
 print(sol.minEatingSpeed(piles = [30,11,23,4,20], h = 6))
