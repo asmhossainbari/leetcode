@@ -1,9 +1,10 @@
+from typing import Optional
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 '''
 If n is the number of node in a binary tree,
 Time complexity: O(n)
@@ -32,3 +33,22 @@ class Solution:
 
         dfs(root)
         return self.diameter
+
+'''
+Following is another approach of implementation without using member variable.
+'''
+
+class Solution2:
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        def dfs(node):
+            if not node:
+                return [0, 0]
+
+            left_child_height = dfs(node.left)
+            right_child_height = dfs(node.right)
+
+            diameter = max(max(left_child_height[0], right_child_height[0]), (left_child_height[1] + right_child_height[1]))
+
+            return [diameter, 1 + max(left_child_height[1], right_child_height[1])]
+
+        return dfs(root)[0]
