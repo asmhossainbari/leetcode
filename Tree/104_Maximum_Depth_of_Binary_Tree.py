@@ -4,17 +4,32 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-# class Solution(object):
-#     def maxDepth(self, root):
-#         """
-#         :type root: TreeNode
-#         :rtype: int
-#         """
-#         if root is None:
-#             return 0
-#         return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+
+'''
+Recursive DFS solution
+n is the number of node in a tree
+Time complexity: O(n)
+Space complexity: O(h), here h is height of the tree
+    If tree is balanced, h is log(n) in best case scenario
+    if tree is unbalanced, h could be n
+'''
+
+class Solution(object):
+    def maxDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if root is None:
+            return 0
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
 
 
+'''
+BFS solution using queue
+Time complexity: O(n)
+Space complexity: O(n)
+'''
 class Solution(object):
     def maxDepth(self, root):
         """
