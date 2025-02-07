@@ -1,3 +1,4 @@
+from collections import deque
 from typing import List
 
 '''
@@ -37,3 +38,35 @@ class Solution:
                 return False
         return True
 
+'''
+Kahn's algorithm
+Time complexity: O (V + E)
+Space complexity: O (V + E)
+where V is the number of courses and E is the number of prerequisites
+'''
+class Solution2:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        in_degree = [0] * numCourses
+        adjacency_list = [[] for i in range(numCourses)]
+        for src, dst in prerequisites:
+            in_degree[dst] += 1
+            adjacency_list[src].append(dst)
+
+        queue = deque()
+        for i in range(numCourses):
+            if in_degree[i] == 0:
+                queue.append(i)
+
+        finish_course = 0
+        while queue:
+            node = queue.popleft()
+            finish_course += 1
+            for neighbour in adjacency_list[node]:
+                in_degree[neighbour] -= 1
+                if in_degree[neighbour] == 0:
+                    queue.append(neighbour)
+
+        if finish_course == numCourses:
+            return True
+        else:
+            return False
