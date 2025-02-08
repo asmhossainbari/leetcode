@@ -70,3 +70,44 @@ class Solution2:
             return True
         else:
             return False
+
+
+'''
+Solution 3 implementation is much better than solution 2 though the time and space complexity is same.
+deque is not used here.
+'''
+class Solution3:
+    def buildAdjacencyList(self, n, edgeList):
+        adjacency_list = {i: [] for i in range(n)}
+        for v1, v2 in edgeList:
+            adjacency_list[v2].append(v1)
+        return adjacency_list
+
+    def topoBFS(self, numCourses, prerequisites):
+        adjacency_list = self.buildAdjacencyList(numCourses, prerequisites)
+        in_degree = [0] * numCourses
+        for v1, v2 in prerequisites:
+            in_degree[v1] += 1
+        queue = []
+        for v in range(numCourses):
+            if in_degree[v] == 0:
+                queue.append(v)
+
+        count = 0
+        while queue:
+            node = queue.pop(0)
+            count += 1
+            for des in adjacency_list[node]:
+                in_degree[des] -= 1
+                if in_degree[des] == 0:
+                    queue.append(des)
+
+        if count != numCourses:
+            return False
+        return True
+
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        if self.topoBFS(numCourses, prerequisites):
+            return True
+        else:
+            return False
