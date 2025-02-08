@@ -39,10 +39,12 @@ class Solution:
         return True
 
 '''
+BFS solution
 Kahn's algorithm
 Time complexity: O (V + E)
 Space complexity: O (V + E)
 where V is the number of courses and E is the number of prerequisites
+
 '''
 class Solution2:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
@@ -73,6 +75,7 @@ class Solution2:
 
 
 '''
+BFS solution
 Solution 3 implementation is much better than solution 2 though the time and space complexity is same.
 deque is not used here.
 '''
