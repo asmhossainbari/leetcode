@@ -3,7 +3,7 @@ class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
         def canEatAll(k):
             time = 0
-            for i, pile in enumerate(piles):
+            for pile in piles:
                 t1 = pile // k
                 if pile % k:
                     t1 += 1
@@ -12,6 +12,14 @@ class Solution:
                 return True
             else:
                 return False
+
+        def canEatAllOptimized(k):
+            time = 0
+            for pile in piles:
+                time += (pile + k - 1) // k
+                if time > h:
+                    return False
+            return True
 
         low = 1
         high = max(piles)
