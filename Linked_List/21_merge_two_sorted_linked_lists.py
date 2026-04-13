@@ -4,6 +4,8 @@ class ListNode(object):
         self.val = val
         self.next = next
 class Solution(object):
+    # Time: O(n + m)
+    # Space: O(n + m) because it creates a new merged list
     def mergeTwoLists(self, list1, list2):
         """
         :type list1: Optional[ListNode]
@@ -36,3 +38,27 @@ class Solution(object):
             list2 = list2.next
             merged_list = merged_list.next
         return result.next
+
+    # Time: O(n + m)
+    # Space: O(1) extra space because it reuses existing nodes
+    def mergeTwoListsOptimized(self, list1, list2):
+        """
+        :type list1: Optional[ListNode]
+        :type list2: Optional[ListNode]
+        :rtype: Optional[ListNode]
+        """
+        # Dummy node avoids special handling for the first merged node.
+        dummy = ListNode(0)
+        tail = dummy
+
+        while list1 is not None and list2 is not None:
+            if list1.val <= list2.val:
+                tail.next = list1
+                list1 = list1.next
+            else:
+                tail.next = list2
+                list2 = list2.next
+            tail = tail.next
+
+        tail.next = list1 if list1 is not None else list2
+        return dummy.next
