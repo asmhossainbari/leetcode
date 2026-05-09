@@ -1,12 +1,13 @@
 from typing import List
+
+
 class Solution:
     # string length + # + string
     def encode(self, strs: List[str]) -> str:
-        result = ''
+        result = []
         for item in strs:
-            result += str(len(item)) + '#' + item
-        # print(f'encode result = {result}')
-        return result
+            result.append(str(len(item)) + '#' + item)
+        return ''.join(result)
 
     # find # character, before # character, the integer value is the string length
     # after # character, go through up to string length index to get the string
@@ -20,8 +21,9 @@ class Solution:
             while s[j] != '#':
                 j += 1
             item_len = int(s[i:j])
-            result.append(s[j + 1: j + 1 + item_len])
+            start = j + 1
+            end = start + item_len
+            result.append(s[start:end])
 
-            i = j + 1 + item_len
-            # print(f'i = {i}')
+            i = end
         return result
