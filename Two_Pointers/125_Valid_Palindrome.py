@@ -1,15 +1,14 @@
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+
 class Solution(object):
     def isPalindrome(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
         left = 0
         right = len(s) - 1
         while left < right:
-            while not s[left].isalnum() and left < right:
+            while left < right and not s[left].isalnum():
                 left += 1
-            while not s[right].isalnum() and left < right:
+            while left < right and not s[right].isalnum():
                 right -= 1
             if s[left].lower() != s[right].lower():
                 return False
