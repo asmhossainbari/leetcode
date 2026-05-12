@@ -4,6 +4,8 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
+        # Time Complexity: O(n log n + n^2) = O(n^2)
+        # Space Complexity: O(1), excluding the output list
         triplet_list = []
         nums.sort()
         for i in range(len(nums) - 2):
@@ -11,22 +13,22 @@ class Solution(object):
                 continue
 
             cur_num = nums[i]
-            first_ptr = i + 1
-            last_ptr = len(nums) - 1
-            while first_ptr < last_ptr:
-                if cur_num + nums[first_ptr] + nums[last_ptr] < 0:
-                    first_ptr = first_ptr + 1
-                elif cur_num + nums[first_ptr] + nums[last_ptr] > 0:
-                    last_ptr = last_ptr - 1
+            left = i + 1
+            right = len(nums) - 1
+            while left < right:
+                if cur_num + nums[left] + nums[right] < 0:
+                    left = left + 1
+                elif cur_num + nums[left] + nums[right] > 0:
+                    right = right - 1
                 else:
-                    lst = [cur_num, nums[first_ptr], nums[last_ptr]]
-                    triplet_list.append(lst)
-                    while first_ptr < last_ptr and (nums[first_ptr] == nums[first_ptr + 1]):
-                        first_ptr = first_ptr + 1
-                    while first_ptr < last_ptr and (nums[last_ptr] == nums[last_ptr - 1]):
-                        last_ptr = last_ptr - 1
-                    first_ptr = first_ptr + 1
-                    last_ptr = last_ptr - 1
+                    triplet_sum = [cur_num, nums[left], nums[right]]
+                    triplet_list.append(triplet_sum)
+                    while left < right and (nums[left] == nums[left + 1]):
+                        left = left + 1
+                    while left < right and (nums[right] == nums[right - 1]):
+                        right = right - 1
+                    left = left + 1
+                    right = right - 1
 
         return triplet_list
 
@@ -35,27 +37,25 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        if nums is None:
-            return []
-        if len(nums) == 0:
-            return []
+        # Time Complexity: O(n log n + n^2) = O(n^2)
+        # Space Complexity: O(k), where k is the number of unique triplets
         nums.sort()
         triplet_set = set()
         i = 0
         while i < len(nums) - 2:
             current_num = nums[i]
-            first_ptr = i + 1
-            last_ptr = len(nums) - 1
-            while first_ptr < last_ptr:
-                triplet_sum = current_num + nums[first_ptr] + nums[last_ptr]
+            left = i + 1
+            right = len(nums) - 1
+            while left < right:
+                triplet_sum = current_num + nums[left] + nums[right]
                 if triplet_sum < 0:
-                    first_ptr += 1
+                    left += 1
                 elif triplet_sum > 0:
-                    last_ptr -= 1
+                    right -= 1
                 else:
-                    triplet_set.add((current_num, nums[first_ptr], nums[last_ptr]))
-                    first_ptr += 1
-                    last_ptr -= 1
+                    triplet_set.add((current_num, nums[left], nums[right]))
+                    left += 1
+                    right -= 1
             i += 1
         triplet_list = []
         for i in triplet_set:
