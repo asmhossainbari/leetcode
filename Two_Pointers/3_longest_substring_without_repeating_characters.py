@@ -9,20 +9,18 @@ class Solution(object):
         """
         left = 0
         right = 0
-        character_set = set()
-        max_substr_length = 0
+        char_set = set()
+        max_substr_len = 0
 
         while right < len(s):
-            if s[right] not in character_set:
-                character_set.add(s[right])
+            if s[right] not in char_set:
+                char_set.add(s[right])
                 right += 1
-                current_set_len = len(character_set)
-                if current_set_len > max_substr_length:
-                    max_substr_length = current_set_len
+                max_substr_len = max(max_substr_len, len(char_set))
             else:
-                character_set.remove(s[left])
+                char_set.remove(s[left])
                 left += 1
-        return max_substr_length
+        return max_substr_len
     
 sol = Solution()
 print(sol.lengthOfLongestSubstring(s="abcabcbb"))
