@@ -3,22 +3,25 @@ class Solution(object):
         """
         :type s: str
         :rtype: int
+
+        Time Complexity: O(n)
+        Space Complexity: O(min(n, m)), where m is the character set size.
         """
-        first_pointer = 0
-        second_pointer = 0
-        character_dict = dict()
+        left = 0
+        right = 0
+        character_set = set()
         max_substr_length = 0
 
-        while second_pointer < len(s):
-            if s[second_pointer] not in character_dict:
-                character_dict[s[second_pointer]] = 1
-                second_pointer += 1
-                current_dict_len = len(character_dict)
-                if current_dict_len > max_substr_length:
-                    max_substr_length = current_dict_len
+        while right < len(s):
+            if s[right] not in character_set:
+                character_set.add(s[right])
+                right += 1
+                current_set_len = len(character_set)
+                if current_set_len > max_substr_length:
+                    max_substr_length = current_set_len
             else:
-                del character_dict[s[first_pointer]]
-                first_pointer += 1
+                character_set.remove(s[left])
+                left += 1
         return max_substr_length
     
 sol = Solution()
